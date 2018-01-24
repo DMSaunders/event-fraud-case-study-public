@@ -15,8 +15,8 @@ We will also touch on some new topics including:
 
 #### Rough timeline 
 
-* Wednesday: Project scoping, Model building, and an intro to Web apps
-* Thursday: Web app and deployment
+* Day 1: Project scoping, Model building, and an intro to Web apps
+* Day 2: Web app and deployment
 
 #### Deliverables
 
