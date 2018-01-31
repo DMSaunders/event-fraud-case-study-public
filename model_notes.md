@@ -25,7 +25,7 @@ Here's how you can do some pickling:
 
 ```python
 import random
-import cPickle as pickle
+import pickle
 
 class MyModel():
     def fit():
