@@ -31,5 +31,5 @@ We will also touch on some new topics including:
 
 #### Notes
 
-* [Summary and schedule](pair.md): detailed instructions on how to structure these two days
+* [Overview and schedule](overview.md): detailed instructions on how to structure these two days
 * [building your model](model_notes.md): notes on how to get started with the dataset and how to save your model once you've trained it.
