@@ -159,7 +159,7 @@ You'll want to store each prediction the model makes on new examples, which mean
 
     The individual example will no longer be coming from a local file, but instead you will get it by making an HTTP GET request to a server that will give you a data point as a string, which you can parse into JSON. You can use json.loads() to parse a string to json, which is the reverse process of json.dumps(). You'll still need to vectorize it, predict, and store the example and prediction in the database.
 
-    You can test out this route by, in a separate script, sending a POST request to /score with a single example in JSON form using the `requests` Python package.
+    You can test out this route by, in a separate script, sending a GET request to the /data_point route on the data server (hosted by us, see section below) using the `requests` Python package.
 
 
 ### Step 6: Get "live" data
@@ -182,6 +182,8 @@ raw_data = response.json()
 1. Write a function that periodically fetches new data, generates a predicted fraud probability, and saves it to your database (after verifying that the data hasn't been seen before).
 
 **Make sure your app is adding the examples to the database with predicted fraud probabilities.**
+
+What's happening over at `http://galvanize-case-study-on-fraud.herokuapp.com/data_point`?  Well, there are 3 concurrent processes load-balanced behind that endpoint, so any request to that URL might end up being routed to one of three processes.  Each of those processes chooses a random data point (with replacement) and continues to serve it up for X seconds, where X is somewhere in the range of 10s-60s (secret ;).  You don't have control (by design) of which process your request gets sent to.  So, you might make three requests to that URL and hit one process once, one process twice, and one process not at all.  Assuming you flooded the server with many requests for a few seconds, you would get many responses, but only 3 of them would be unique.  If you continued to make requests and de-duplicate the results over a longer period of time, you would get a maximum of 3 unique data points every X seconds.
 
 ## Day 2: Afternoon
 
