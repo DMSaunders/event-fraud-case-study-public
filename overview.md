@@ -11,7 +11,7 @@ It is located in `data/data.zip`.
 You will be required to work on the project on campus.
 
 
-### Deliverables (i.e. what you will be graded on)
+### Deliverables 
 * Scoping document (in Markdown)
 * Code on private fork of repo on Github
     * proper functions/encapsulation
@@ -36,7 +36,7 @@ Something that you will need to think about throughout this case study is how th
     * Other (non-technical) people may need to interact with the model/machinery
     * Manual review
 
-The fraud problem is actually semi-supervised in a way.  You do not use the model to declare a ground truth about fraud or not fraud, but simply to flag which transactions need further manual review.  You will be building a triage model of what are the most pressing (and costly) transactions you have seen.
+Your model will be used only the first step in the fraud identification process. You do not use the model to declare a ground truth about fraud or not fraud, but simply to flag which transactions need further manual review.  You will be building a triage model of what are the most pressing (and costly) transactions you have seen. It may also be useful to display what factors contribute to a given case being flagged as fraudulent by your model.  
 
 ## Day 1: Morning
 
@@ -62,7 +62,7 @@ Before you get cranking on your model, think of how to approach the problem.
 
 2. What models do you want to try?
 
-3. What metric will you use to determine success?
+3. **What metric will you use to determine success?**
 
 
 ### Step 2: Building the Model
@@ -95,7 +95,7 @@ After all this experimentation, you should end up with a model you are happy wit
     * Feel free to use any library to get the job done.
     * Again, make sure your code is **clean**, **modular** and **well-commented**! The general rule of thumb: if you looked at your code in a couple months, would you be able to understand it?
 
-2. In your pull request, describe your project findings including:
+2. In a file called `report.md`, describe your project findings including:
     * An overview of a chosen "optimal" modeling technique, with:
         * process flow
         * preprocessing
@@ -157,10 +157,8 @@ You'll want to store each prediction the model makes on new examples, which mean
     
     Do both in a `if __name__ == '__main__':` block before you call `app.run()` and you can refer to these top-level global variables from within the function. This may require some re-architecting of your prediction module.
 
-    The individual example will no longer be coming from a local file, but instead you will get it by making an HTTP GET request to a server that will give you a data point as a string, which you can parse into JSON. You can use json.loads() to parse a string to json, which is the reverse process of json.dumps(). You'll still need to vectorize it, predict, and store the example and prediction in the database.
-
-    You can test out this route by, in a separate script, sending a GET request to the /data_point route on the data server (hosted by us, see section below) using the `requests` Python package.
-
+    The individual example will no longer be coming from a local file, but instead you will get it by making a request to a server that will give you a data point as a string, which you can parse into JSON. 
+You can use `json.loads()` to parse a string to json, which is the reverse process of `json.dumps()`. You'll still need to vectorize it, predict, and store the example and prediction in the database.
 
 ### Step 6: Get "live" data
 
