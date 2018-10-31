@@ -26,5 +26,5 @@ We will want two deliverables from you for this project:
 
 #### Notes
 
-* [Building your model](model_notes.md): notes on how to get started with the dataset and how to save your model once you've trained it.
 * [Overview](overview.md): gives a detailed overview of the project.  Included are *suggestions* for how you can organize your team, though this is not binding, and you are free to deviate.
+* [Building your model](model_notes.md): notes on how to get started with the dataset and how to save your model once you've trained it.
