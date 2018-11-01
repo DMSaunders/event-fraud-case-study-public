@@ -177,7 +177,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
 ```
 
-    Use this [tutorial](http://blog.luisrei.com/articles/flaskrest.html) to for more.
+Use this [tutorial](http://blog.luisrei.com/articles/flaskrest.html) to for more.
 
 #### [Deliverable]: Fraud scoring service
 
