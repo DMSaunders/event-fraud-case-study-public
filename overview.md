@@ -150,7 +150,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def home():
-    return ''' <p> nothing here, friend, but a link to <a href="/hello">hello</a> and an <a href="/form_example">example form</a> </p> '''
+    return ''' <p> nothing here, friend, but a link to 
+                   <a href="/hello">hello</a> and an 
+                   <a href="/form_example">example form</a> </p> '''
 
 @app.route('/hello', methods=['GET'])
 def hello_world():
