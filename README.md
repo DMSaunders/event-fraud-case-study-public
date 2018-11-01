@@ -29,14 +29,6 @@ We will want two deliverables from you for this project:
 * [Overview](overview.md): gives a detailed overview of the project.  Included are *suggestions* for how you can organize your team, though this is not binding, and you are free to deviate.
 * [Building your model](model_notes.md): notes on how to get started with the dataset and how to save your model once you've trained it.
 
-<<<<<<< HEAD
-
-
-
----------------------------------------------------------------
-
-decided to pick all numerical features first and run random forest.
-=======
 ------------------------------------------------------------------------
 Reducing scope:
 Decided to pick all numerical features first and run random forest.
@@ -47,4 +39,3 @@ Looked at the features which we would receive from the API live feed and threw o
 Reduced to
 
 'channels', 'country', 'currency', 'delivery_method', 'description', 'email_domain', 'event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_header', 'has_logo', 'listed', 'name', 'name_length', 'object_id', 'org_desc', 'org_facebook', 'org_name', 'org_twitter', 'payee_name', 'previous_payouts', 'show_map', 'ticket_types', 'user_age', 'user_created', 'user_type', 'venue_address', 'venue_country', 'venue_latitude', 'venue_longitude', 'venue_name', 'venue_state'
->>>>>>> daniellebranch
