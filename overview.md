@@ -142,7 +142,7 @@ You'll want to store each prediction the model makes on new examples, which mean
 
 #### [Deliverable]: Hello World app
 
-1. A request in your browser to `/hello` should display "Hello, World!". Set up a Flask app with a route `GET /hello` to do so. Here's an example app:
+1. A request in your browser to `/hello` should display "Hello, World!". Set up a Flask app with a route `GET /hello` to do so. Here's an example app skeleton:
 
 ```python
 from flask import Flask, request
