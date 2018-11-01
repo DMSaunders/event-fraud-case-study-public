@@ -10,4 +10,3 @@ The next step was to create dummy variables for the many categorical columns to 
 
 If we had more time to develop the model...
 
-
