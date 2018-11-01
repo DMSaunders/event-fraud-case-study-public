@@ -14,6 +14,8 @@ def data_clean():
     #Drops all columns that we cannot use
     data = data.drop(['approx_payout_date', 'body_length', 'gts', 'num_order', 'num_payouts', 'sale_duration2'], axis = 1)
     
+    #Drops all columns that are non-numerical
+    data = data.drop([])
     return data
 
 
