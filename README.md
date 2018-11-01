@@ -34,4 +34,4 @@ We will want two deliverables from you for this project:
 
 ---------------------------------------------------------------
 
-decided to pick one numerical feature first and run random forest.
+decided to pick all numerical features first and run random forest.
