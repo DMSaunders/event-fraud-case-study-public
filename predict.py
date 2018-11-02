@@ -31,11 +31,11 @@ dynamo = boto3.resource('dynamodb')
 table = dynamo.Table('fraud_detection')
 
 if __name__ == "__main__":
+    # load in the model
+    model = pickle.load(open('fraud_model.p', 'wb'))
+
     while True:
         time.sleep(60)
-
-        # load in the model
-        # model = pickle.load(open('clf.p', 'wb'))
 
         # get new data point
         api_key = 'vYm9mTUuspeyAWH1v-acfoTlck-tCxwTw9YfCynC'
