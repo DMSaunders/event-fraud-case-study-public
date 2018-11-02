@@ -116,15 +116,9 @@ if __name__ == '__main__':
     print('Best parameters: {}'.format(clf.best_params_))
     print('Best Recall: {}'.format(clf.best_score_))
     
-    
     gb = GradientBoostingClassifier(learning_rate= clf.best_params_['learning_rate'],max_depth=clf.best_params_['max_depth'],n_estimators=clf.best_params_['n_estimators'],subsample = clf.best_params_['subsample'])
 
     gb.fit(X_train, y_train)
-    print("Out of sample Recall: {}".format(cross_val_score(gb, X_test, y_test, cv = 3, scoring='recall'))
+    print("Out of sample Recall: {}".format(cross_val_score(gb, X_test, y_test, cv = 3, scoring='recall')))
     
-
-#     roc_curve
-    predicted_probs = gb.predict_proba(X_test)[:,1]
-    roc_auc_score(y_test, predicted_probs)
-    
-    pickle.dump(gb,open('fraud_model.p','wb'))
+# pickle.dump(gb,open('fraud_model.p','wb'))
