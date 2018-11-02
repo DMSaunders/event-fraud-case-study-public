@@ -4,6 +4,7 @@ import sys
 import pandas as pd
 import fraud_clean_with_categorical_features as f
 
+features = model.feature_
 
 if __name__ == "__main__":
 
@@ -35,10 +36,15 @@ if __name__ == "__main__":
 
 
     # get prediction label (Low, Med, High)
+    if prediction < 0.01:
+        label = 'Low'
+    elif prediction < 0.02
+        label = "Medium"
+    else:
+        label = "High"
 
+    # output prediction, whole record
+    data['fraud_probablility'] = prediction
+    data['fraud_label'] = label
+    sys.stdout.write(data.to_json())
 
-    # get feature importances, top 3?
-
-
-    # output prediction
-    sys.stdout.write(prediction)
