@@ -79,7 +79,7 @@ def score_model(y_test, predictions):
 ################################################################
 if __name__ == '__main__':
     data = pd.read_json('data/data.zip')
-    data = data_clean()
+    data = data_clean(data)
     X, y = define_features_and_target(data, 'Fraud')
     X_train, X_test, y_train, y_test = split_data(X, y)
 
