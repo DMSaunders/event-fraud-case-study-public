@@ -44,7 +44,9 @@ if __name__ == "__main__":
         label = "High"
 
     # output prediction, whole record
-    data['fraud_probablility'] = prediction
-    data['fraud_label'] = label
-    sys.stdout.write(data.to_json())
+
+    full_data = pd.DataFrame.from_dict(raw_data['data'])
+    full_data['fraud_probablility'] = prediction
+    full_data['fraud_label'] = label
+    sys.stdout.write(full_data.to_json())
 
