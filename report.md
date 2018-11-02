@@ -7,13 +7,29 @@ Our goal is to return a predicted probability that a given event posted on our w
 ## Accuracy Metrics
 We evaluated our models with a Roc_Auc score and a recall score because it shows how many fraudulent events we catch out of all the fraudulent events. A profit analysis would determine the optimum threshold for predicting fraud. We avoided accuracy since it is less applicable to imbalanced datasets like ours, where around 10% of the labels are fraud, and the rest non-fraud. 
 
-After inspecting the data and the format of incoming data we determined that we would make basic models with the numeric data and proceed to tune and feature engineer for the basic model which performed best initially. We initially tried a Random Forest model, a Logistic Regression model, and a Gradient Boosting model. The Random Forest model performed best initially with a recall score around 0.65. The others were significantly worse. After some tuning and grid searching we were able to get a cross-validated recall score around 0.72. We decided to proceed with this model.
+## Preprocessing
+After inspecting the data and the incoming data from the API we determined that we would make basic models with features filling these requirements: 
+* numeric data (for simplicity)
+* features present in the API 
+* features that would be available at the time of prediction
 
-The next step was to create dummy variables for the many categorical columns to attempt to pick up any signal that may be present in those variables. At this iteration we left out the columns that would require NLP for further analysis, such as the event titles and descriptions. For columns with a significant amount missing data, we encoded missing values as a dummy variable so as to retain the signal that could be provided by a user not submitting data for that column. The result was...
+We tuned and feature engineered for the basic model which performed best on this feature set. We started with a Random Forest model, a Logistic Regression model, and a Gradient Boosting model. The Random Forest model performed best with a recall score around 0.65. The others were significantly worse. 
 
-We were pleasantly surprised by the roc score and the graph. At .97, we noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
+The next step was to create dummy variables for the many categorical columns to attempt to pick up any signal that may be present in those variables. At this iteration we left out the columns that would require NLP for further analysis, such as the event titles and descriptions. For columns with a significant amount missing data, we encoded missing values as a dummy variable so as to retain the signal that could be provided by a user not submitting data for that column. 
 
-Our next steps will be to use NLP on the descriptive features and run that version of the data through our pipeline.
+## Parameter Tuning
+The categorical feature set, with gridsearch, was a lower score of around .50. After some tuning and grid searching we were able to get a cross-validated recall score around 0.72 with Gradient Boosting on the most basic feature set. We decided to proceed with this model. 
+
+We were pleasantly surprised by the roc score (area under the curve) of .97. We noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
+
+## Dashboard
+We had the pleasure of collaborating with the web development students for the production of the web app. We created a flask server which queries all the rows from our DynamoDB and returns them when @app.route is hit. Web dev created a dashboard displaying these rows with a subset of relevant columns: Event name, probability of fraud, risk label (low, med, high), and event id. This enables a user to see the events by risk and take action to take down fraudulent events, saving the company reimbursement costs.
+
+## AWS
+We hosted all of this on a deep learning Amazon Web Services EC2 instance so that the web dev team could access our server.
+
+## Next Steps
+Our next steps will be to use NLP on the descriptive features and run that version of the data through our pipeline. Given that our gradient boosting model reveals feature importances for each feature, we would like to display the top three most important features in the model on our dashboard so users can see which event attributes most likely caused the event to be flagged. The user who is contacting the event creator can be aware that we flagged events most likely due to user type, user age (in days since account creation), and/or presence of logo. That way, if the user encounters a non-fraudulent user, they can remedy the event or assure the user that likelihood of being flagged declines with account age. 
 
 -------------
 

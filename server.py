@@ -5,8 +5,10 @@ import predict
 import boto3
 import json
 from boto3.dynamodb.conditions import Key, Attr
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/score', methods=['GET'])
 def import_DB():
