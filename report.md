@@ -11,7 +11,7 @@ After inspecting the data and the format of incoming data we determined that we 
 
 The next step was to create dummy variables for the many categorical columns to attempt to pick up any signal that may be present in those variables. At this iteration we left out the columns that would require NLP for further analysis, such as the event titles and descriptions. For columns with a significant amount missing data, we encoded missing values as a dummy variable so as to retain the signal that could be provided by a user not submitting data for that column. The result was...
 
-We were pleasantly surprised by the roc score and the graph. At .97, we noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67
+We were pleasantly surprised by the roc score and the graph. At .97, we noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
 
 Our next steps will be to use NLP on the descriptive features and run that version of the data through our pipeline.
 
