@@ -30,7 +30,6 @@ raw_data = response.json()
 
 data_point = pd.DataFrame.from_dict(raw_data['data'])
 data_point = f.drop_cols(raw_data)
-data_point
 
 # transformations
 data = select_features(raw_data)
