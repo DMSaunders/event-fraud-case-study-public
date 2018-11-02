@@ -28,7 +28,7 @@ def data_clean():
     
 #     set up new features event_duration and event_work_duration
     data['event_duration']=(data['event_end']-data['event_start'])/86400
-    data['event_work_duration']=(data['event_published']-data['event_created'])/86400
+    # data['event_work_duration']=(data['event_published']-data['event_created'])/86400
     data = data.drop(['event_start','event_end','event_published','event_created'],axis=1)
     data = data.dropna(axis=1)
     
@@ -46,7 +46,7 @@ def clean_new_data_point(data_point):
     
     # set up new features event_duration and event_work_duration
     data['event_duration']=(data['event_end']-data['event_start'])/86400
-    data['event_work_duration']=(data['event_published']-data['event_created'])/86400
+    # data['event_work_duration']=(data['event_published']-data['event_created'])/86400
     data = data.drop(['event_start','event_end','event_published','event_created'],axis=1)
     data = data.dropna(axis=1)
 
