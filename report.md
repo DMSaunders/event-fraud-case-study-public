@@ -5,7 +5,7 @@
 Our goal is to return a predicted probability that a given event posted on our website is fraudulent. Our primary motivation is to the prevention of false negatives: when an event is actually fraudulent yet we predict that it is not. In this case our company must refund our customers for the fraudulent tickets. It would be much better to catch these fraudulent events first and investigate them. 
 
 ## Accuracy Metrics
-We evaluated our models with recall score because it shows how many fraudulent events we catch out of all the fraudulent events. A profit analysis would determine the optimum threshold for predicting fraud. We avoided accuracy since it is less applicable to imbalanced datasets like ours, where around 10% of the labels are fraud, and the rest non-fraud. 
+We evaluated our models with a Roc_Auc score and a recall score because it shows how many fraudulent events we catch out of all the fraudulent events. A profit analysis would determine the optimum threshold for predicting fraud. We avoided accuracy since it is less applicable to imbalanced datasets like ours, where around 10% of the labels are fraud, and the rest non-fraud. 
 
 After inspecting the data and the format of incoming data we determined that we would make basic models with the numeric data and proceed to tune and feature engineer for the basic model which performed best initially. We initially tried a Random Forest model, a Logistic Regression model, and a Gradient Boosting model. The Random Forest model performed best initially with a recall score around 0.65. The others were significantly worse. After some tuning and grid searching we were able to get a cross-validated recall score around 0.72. We decided to proceed with this model.
 
