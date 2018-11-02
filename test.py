@@ -1,2 +1,0 @@
-from fraud_clean_with_categorical_features import drop_cols
-
