@@ -96,11 +96,11 @@ if __name__ == '__main__':
 
     # GridSearch
     params = {
-        'learning_rate' : [0.1, 0.01],
-        'n_estimators' : [500, 1000],
-        'subsample' : [1, 0.5],
+        'learning_rate' : [0.1],
+        'n_estimators' : [1000, 2000],
+        'subsample' : [0.5, 0.3],
         'min_samples_split' : [2, 3],
-        'max_depth' : [3, 5],
+        'max_depth' : [5, 7],
     }
 
     # Turns our recall func into a scorer of the type required
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     recall_scorer = make_scorer(score_model, greater_is_better=True)
     gb = GradientBoostingClassifier()
     gscv = GridSearchCV(gb, param_grid=params,
-                        scoring=recall_scorer,
+                        scoring='recall',
                         cv=3,
                         n_jobs=-1)
     clf = gscv.fit(X_train, y_train)
@@ -118,15 +118,13 @@ if __name__ == '__main__':
     
     
     gb = GradientBoostingClassifier(learning_rate= clf.best_params_['learning_rate'],max_depth=clf.best_params_['max_depth'],n_estimators=clf.best_params_['n_estimators'],subsample = clf.best_params_['subsample'])
-    
-    cross_val_score(gb, X_train, y_train, cv = 3, scoring='recall')
-    
+
     gb.fit(X_train, y_train)
+    print("Out of sample Recall: {}".format(cross_val_score(gb, X_test, y_test, cv = 3, scoring='recall'))
     
+
 #     roc_curve
-#     predicted_probs = gb.predict_proba(X_test)[:,1]
-#     roc_auc_score(y_test, predicted_probs)
+    predicted_probs = gb.predict_proba(X_test)[:,1]
+    roc_auc_score(y_test, predicted_probs)
     
     pickle.dump(gb,open('fraud_model.p','wb'))
-    
-#     gb = pickle.load(open('linreg.p','rb'))
