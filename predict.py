@@ -2,7 +2,8 @@ import pickle
 import requests
 import sys
 import pandas as pd
-import fraud_clean_with_categorical_features as f
+# import fraud_clean_with_categorical_features as f
+import fraud_model_building as f
 
 features = model.feature_
 
@@ -21,15 +22,14 @@ if __name__ == "__main__":
 
     # check if already in data base
 
-
     # transformations
-    data_point = pd.DataFrame.from_dict(raw_data['data'])
-    data_point = f.drop_cols(raw_data)
-    data = select_features(raw_data)
-    data = f.one_hot_with_nan(data)
-    data = f.one_hot_without_nan(data)
-    data = f.drop_nan(data)
-
+    data = pd.DataFrame.from_dict(raw_data['data'])
+    # data_point = f.drop_cols(raw_data)
+    # data = select_features(raw_data)
+    # data = f.one_hot_with_nan(data)
+    # data = f.one_hot_without_nan(data)
+    # data = f.drop_nan(data)
+    data = f.clean_new_data_point()
 
     # get prediction probability
     prediction = model.predict_proba(data)

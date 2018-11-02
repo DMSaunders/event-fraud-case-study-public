@@ -9,12 +9,8 @@ import fraud_clean_with_categorical_features as feature
 import pickle
 
 
-
 def data_clean():
-    
-    
-    data = pd.read_json('data/data.zip')
-    
+        
     #Creates a Fraud column of True or False for each event.
     data['Fraud'] = ((data['acct_type'] == 'fraudster_event') | 
                     (data['acct_type'] == 'fraudster') | 
@@ -23,7 +19,6 @@ def data_clean():
     #Drops all columns that we cannot use
     data = data.drop(['approx_payout_date', 'body_length', 'gts', 'num_order', 'num_payouts', 'sale_duration2', 'payout_type', 'sale_duration'], axis = 1)
     
-
 #    'channels', 'country', 'currency', 'delivery_method', 'description', 'email_domain', 'event_created', #'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_header', 'has_logo', #'listed', 'name', 'name_length', 'object_id', 'org_desc', 'org_facebook', 'org_name', 'org_twitter', #'payee_name', 'previous_payouts', 'show_map', 'ticket_types', 'user_age', 'user_created', 'user_type', #'venue_address', 'venue_country', 'venue_latitude', 'venue_longitude', 'venue_name', 'venue_state'
 
     
@@ -41,10 +36,21 @@ def data_clean():
 #     data = feature.one_hot_with_nan(data)
 #     data = feature.one_hot_without_nan(data)
 #     data= feature.drop_nan(data)
-    
-    
+
     return data
      
+def clean_new_data_point(data_point):
+    # Drops all columns that are non-numerical
+    data = data[['Fraud','delivery_method', 'event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_header',	'has_logo', 'object_id', 'org_facebook', 'org_twitter', 'show_map', 'user_age', 'user_created', 'user_type', 'venue_latitude',	'venue_longitude']]
+    
+    
+    # set up new features event_duration and event_work_duration
+    data['event_duration']=(data['event_end']-data['event_start'])/86400
+    data['event_work_duration']=(data['event_published']-data['event_created'])/86400
+    data = data.drop(['event_start','event_end','event_published','event_created'],axis=1)
+    data = data.dropna(axis=1)
+
+    return data
 
 def define_features_and_target(dataframe, target):
     X = dataframe.drop(target, axis=1)
@@ -72,6 +78,7 @@ def score_model(y_test, predictions):
 
 ################################################################
 if __name__ == '__main__':
+    data = pd.read_json('data/data.zip')
     data = data_clean()
     X, y = define_features_and_target(data, 'Fraud')
     X_train, X_test, y_train, y_test = split_data(X, y)
