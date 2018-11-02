@@ -9,7 +9,7 @@ import fraud_clean_with_categorical_features as feature
 import pickle
 
 
-def data_clean():
+def data_clean(data):
         
     #Creates a Fraud column of True or False for each event.
     data['Fraud'] = ((data['acct_type'] == 'fraudster_event') | 
