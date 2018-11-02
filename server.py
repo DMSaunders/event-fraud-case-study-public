@@ -12,8 +12,7 @@ app = Flask(__name__)
 def import_DB():
     #THE QUERY
     x = table.scan()
-    items = x['Items']
-    return items
+    return x
 
 #needs to output
 # {causes:{1,2,3},
