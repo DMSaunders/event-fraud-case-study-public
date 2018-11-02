@@ -12,6 +12,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 key_features = ['user_age', 'user_type', 'has_logo']
 
+# recursively delete empty strings
 def del_empty(d):
     """
     Delete keys with the value ``None`` in a dictionary, recursively.
@@ -23,7 +24,7 @@ def del_empty(d):
         if value == '':
             del d[key]
         elif isinstance(value, dict):
-            del_none(value)
+            del_empty(value)
     return d  # For convenience
 
 dynamo = boto3.resource('dynamodb')
