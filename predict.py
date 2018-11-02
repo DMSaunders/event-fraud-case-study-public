@@ -1,6 +1,8 @@
 import pickle
 import requests
 import sys
+import pandas as pd
+import fraud_clean_with_categorical_features as f
 
 # load in the model
 model = pickle.load(open('clf.p', 'wb'))
@@ -13,24 +15,28 @@ response = requests.post(url, json={'api_key': api_key,
                                     'sequence_number': sequence_number})
 raw_data = response.json()
 
-keep = ['event_created', 'event_end', 'event_published', 'event_start', 'fb_published','has_analytics', 'has_header', 'has_logo', 'object_id', 'org_facebook','org_twitter', 'show_map', 'user_age', 'user_created', 'user_type','venue_latitude' 'venue_longitude']
+# keep = ['event_created', 'event_end', 'event_published', 'event_start', 'fb_published','has_analytics', 'has_header', 'has_logo', 'object_id', 'org_facebook','org_twitter', 'show_map', 'user_age', 'user_created', 'user_type','venue_latitude' 'venue_longitude']
 
-def select_features(data_point):
-    '''
-    takes in a new data point and keeps only relevant features
-    '''
-    clean = {}
-    data_point = data_point['data'][0]
-    for key, value in data_point.items():
-        if key in keep:
-            clean.update({key: value})
-    return data_point
+# def select_features(data_point):
+#     '''
+#     takes in a new data point and keeps only relevant features
+#     '''
+#     clean = {}
+#     data_point = data_point['data'][0]
+#     for key, value in data_point.items():
+#         if key in keep:
+#             clean.update({key: value})
+#     return data_point
 
-# select relevant features
+data_point = pd.DataFrame.from_dict(raw_data['data'])
+data_point = f.drop_cols(raw_data)
+data_point
+
+# transformations
 data = select_features(raw_data)
-
-# one-hot categorical features
-
+data = f.one_hot_with_nan(data)
+data = f.one_hot_without_nan(data)
+data = f.drop_nan(data)
 
 # get prediction
 prediction = model.predict(data)

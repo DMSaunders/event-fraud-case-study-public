@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 
-def drop_cols():
-    
-    data = pd.read_json('data/data.zip')
+
+data = pd.read_json('data/data.zip')
+
+def drop_cols(data):
     
     #Creates a Fraud column of True or False for each event.
     data['Fraud'] = (data['acct_type'] == 'fraudster_event') | (data['acct_type'] == 'fraudster') | (data['acct_type'] == 'fraudster_att')
