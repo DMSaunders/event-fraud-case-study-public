@@ -2,7 +2,10 @@
 
 ## Problem Statement
 
-Our goal is to return a predicted probability that a given event posted on our website is fraudulent. Our primary motivation is to the prevention of false negatives: when an event is actually fraudulent yet we predict that it is not. In this case our company must refund our customers for the fraudulent tickets. It would be much better to catch these fraudulent events first and investigate them. 
+Our goal is to create a live dashboard with the predicted probability of fraud for every event the moment they are created on our client's events website. Our primary motivation is the prevention of false negatives: when an event is actually fraudulent yet we predict that it is not, since the company must refund their customers for the fraudulent tickets. It would be much better to catch these fraudulent events first and investigate them. 
+
+## Process Flow
+We tackled this We started with a brainstorm on accuracy metrics, preprocessing
 
 ## Accuracy Metrics
 We evaluated our models with a Roc_Auc score and a recall score because it shows how many fraudulent events we catch out of all the fraudulent events. A profit analysis would determine the optimum threshold for predicting fraud. We avoided accuracy since it is less applicable to imbalanced datasets like ours, where around 10% of the labels are fraud, and the rest non-fraud. 
@@ -20,7 +23,7 @@ The next step was to create dummy variables for the many categorical columns to 
 ## Parameter Tuning
 The categorical feature set, with gridsearch, was a lower score of around .50. After some tuning and grid searching we were able to get a cross-validated recall score around 0.72 with Gradient Boosting on the most basic feature set. We decided to proceed with this model. 
 
-We were pleasantly surprised by the roc score (area under the curve) of .97. We noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
+We were pleasantly surprised by the roc score (area under the curve) of .97. This turned out to be one of the higher scores achieved by the teams competing on this project. We noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
 
 ## Dashboard
 We had the pleasure of collaborating with the web development students for the production of the web app. We created a flask server which queries all the rows from our DynamoDB and returns them when @app.route is hit. Web dev created a dashboard displaying these rows with a subset of relevant columns: Event name, probability of fraud, risk label (low, med, high), and event id. This enables a user to see the events by risk and take action to take down fraudulent events, saving the company reimbursement costs.
@@ -34,11 +37,8 @@ Our next steps will be to use NLP on the descriptive features and run that versi
 -------------
 
 
-An overview of a chosen "optimal" modeling technique, with:
-process flow
-preprocessing
-accuracy metrics selected
-validation and testing methodology
+
+ing methodology
 parameter tuning involved in generating the model
 further steps you might have taken if you were to continue the project.
 
