@@ -1,7 +1,5 @@
 # Fraud Detection Case Study
 
-For the next two days we will work with the entire end to end pipeline of data science through a case study.  We have touched on aspects of this throughout the course but have not yet put all the pieces together.
-
 Topics included in this case study include:
 * Classification modeling.
 * Programming Practice: Handing off models. 
@@ -19,23 +17,20 @@ Topics included in this case study include:
 
 #### Deliverables
 
-We will want two deliverables from you for this project:
-
-* A dashboard for investigators to use which helps them identify new events that are worthy of investigation for fraud.  This will pull in new data regularly, and update a useful display for the investigation team.  How you wish to lay this out is up to you.
+* A dashboard for investigators to use which helps them identify new events that are worthy of investigation for fraud.  This will pull in new data regularly, and update a useful display for the investigation team.  
 * A ten-minute presentation on your process and results. 
 
-#### Notes
+#### Problem Statement
 
-* [Overview](overview.md): gives a detailed overview of the project.  Included are *suggestions* for how you can organize your team, though this is not binding, and you are free to deviate.
-* [Building your model](model_notes.md): notes on how to get started with the dataset and how to save your model once you've trained it.
+Our goal is to create a live dashboard with the predicted probability of fraud for every event the moment users create them on our client's events hosting website. Our primary motivation is the prevention of false negatives: when an event is actually fraudulent yet we predict that it is not, since the company must refund their customers for the fraudulent tickets. It would be much better to catch these fraudulent events first and investigate them. We had 2 days to complete this project.
 
-------------------------------------------------------------------------
-Reducing scope:
-Decided to pick all numerical features first and run random forest.
-Looked at the features which we would receive from the API live feed and threw out all features not included there from our features list since we would not be able to use them to predict. We also excluded information that would not be present when we need to predict.
+#### Process Flow
+We tackled this project as a cross-functional team with 2 web developers and 4 data scientists. We started with a brainstorm on the content of the dashboard so web dev could prototype until we could connect them to the database containing the events and our predictions. 
 
-'acct_type', 'approx_payout_date', 'body_length', 'channels', 'country', 'currency', 'delivery_method', 'description', 'email_domain', 'event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'gts', 'has_analytics', 'has_header', 'has_logo', 'listed', 'name', 'name_length', 'num_order', 'num_payouts', 'object_id', 'org_desc', 'org_facebook', 'org_name', 'org_twitter', 'payee_name', 'payout_type', 'previous_payouts', 'sale_duration', 'sale_duration2', 'show_map', 'ticket_types', 'user_age', 'user_created', 'user_type', 'venue_address', 'venue_country', 'venue_latitude', 'venue_longitude', 'venue_name', 'venue_state'
+#### Accuracy Metrics
+We evaluated our models with a Roc_Auc score and a recall score because it shows how many fraudulent events we catch out of all the fraudulent events. A profit analysis would determine the optimum threshold for predicting fraud. We avoided accuracy since it is less applicable to imbalanced datasets like ours, where around 10% of the labels are fraud, and the rest non-fraud. 
 
-Reduced to
+#### Results
+We were pleasantly surprised by a roc score (area under the curve) of .97. This turned out to be one of the higher scores achieved by the teams competing on this project.
 
-'channels', 'country', 'currency', 'delivery_method', 'description', 'email_domain', 'event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_header', 'has_logo', 'listed', 'name', 'name_length', 'object_id', 'org_desc', 'org_facebook', 'org_name', 'org_twitter', 'payee_name', 'previous_payouts', 'show_map', 'ticket_types', 'user_age', 'user_created', 'user_type', 'venue_address', 'venue_country', 'venue_latitude', 'venue_longitude', 'venue_name', 'venue_state'
+Please see [report](report.md) for more results.
