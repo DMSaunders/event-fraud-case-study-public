@@ -5,7 +5,6 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
 from sklearn.metrics import recall_score, classification_report, confusion_matrix, roc_auc_score
 from sklearn.metrics import make_scorer
-import fraud_clean_with_categorical_features as feature
 import pickle
 
 
@@ -41,7 +40,7 @@ def data_clean(data):
      
 def clean_new_data_point(data_point):
     # Drops all columns that are non-numerical
-    data = data[['delivery_method', 'event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_header',	'has_logo', 'object_id', 'org_facebook', 'org_twitter', 'show_map', 'user_age', 'user_created', 'user_type', 'venue_latitude',	'venue_longitude']]
+    data = data_point[['event_created', 'event_end', 'event_published', 'event_start', 'fb_published', 'has_analytics', 'has_logo', 'object_id',  'show_map', 'user_age', 'user_created', 'user_type']]
     
     
     # set up new features event_duration and event_work_duration

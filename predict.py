@@ -27,15 +27,15 @@ def del_empty(d):
             del_empty(value)
     return d  # For convenience
 
-dynamo = boto3.resource('dynamodb')
+dynamo = boto3.resource('dynamodb', 'us-east-1')
 table = dynamo.Table('fraud_detection')
 
 if __name__ == "__main__":
     # load in the model
-    model = pickle.load(open('fraud_model.p', 'wb'))
+    model = pickle.load(open('fraud_model.p', 'rb'))
 
     while True:
-        time.sleep(60)
+        sleep(6)
 
         # get new data point
         api_key = 'vYm9mTUuspeyAWH1v-acfoTlck-tCxwTw9YfCynC'
@@ -49,16 +49,16 @@ if __name__ == "__main__":
 
         # transformations
         data = pd.DataFrame.from_dict(raw_data['data'])
-        data = f.clean_new_data_point()
+        data = f.clean_new_data_point(data)
 
         # get prediction probability
-        prediction = model.predict_proba(data)
+        prediction = model.predict_proba(data)[:,1]
 
 
         # get prediction label (Low, Med, High)
         if prediction < 0.01:
             label = 'Low'
-        elif prediction < 0.02
+        elif prediction < 0.02:
             label = "Medium"
         else:
             label = "High"
