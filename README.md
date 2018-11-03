@@ -1,6 +1,6 @@
 # Fraud Detection Case Study
 
-Topics included in this case study include:
+Topics in this case study:
 * Classification modeling.
 * Programming Practice: Handing off models. 
 * Teamwork.
@@ -18,7 +18,7 @@ Topics included in this case study include:
 #### Deliverables
 
 * A dashboard for investigators to use which helps them identify new events that are worthy of investigation for fraud.  This will pull in new data regularly, and update a useful display for the investigation team.  
-* A ten-minute presentation on your process and results. 
+* A ten-minute presentation on our process and results. 
 
 #### Problem Statement
 
