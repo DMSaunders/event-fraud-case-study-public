@@ -20,10 +20,14 @@ We tuned and feature engineered for the basic model which performed best on this
 
 The next step was to create dummy variables for the many categorical columns to attempt to pick up any signal that may be present in those variables. At this iteration we left out the columns that would require NLP for further analysis, such as the event titles and descriptions. For columns with a significant amount missing data, we encoded missing values as a dummy variable so as to retain the signal that could be provided by a user not submitting data for that column. 
 
+![alt text](https://github.com/DMSaunders/event-fraud-case-study-public/blob/master/Screen%20Shot%202019-01-13%20at%207.32.20%20PM.png "Logo Title Text 1")
+
 ## Parameter Tuning
 The categorical feature set, with gridsearch, was a lower score of around .50. After some tuning and grid searching we were able to get a cross-validated recall score around 0.72 with Gradient Boosting on the most basic feature set. We used 3-fold cross-validation and a couple parameters for number of estimators, percent subsample, minimum sample split, and max depth, with a single learning rate of .10. We decided to proceed with this model. 
 
 We were pleasantly surprised by the roc score (area under the curve) of .97. This turned out to be one of the higher scores achieved by the teams competing on this project. We noticed that when we lower our threshold into the .005 range, we can send our recall score into the .90s while maintaining a false positive rate below .20. At a threshold of around .50, our recall is around .67.
+
+![alt text](https://github.com/DMSaunders/event-fraud-case-study-public/blob/master/Screen%20Shot%202019-01-13%20at%207.34.43%20PM.png "Logo Title Text 1")
 
 ## Dashboard
 We had the pleasure of collaborating with the web development students for the production of the web app. We created a flask server which queries all the rows from our DynamoDB and returns them when @app.route is hit. Web dev created a dashboard displaying these rows with a subset of relevant columns: Event name, probability of fraud, risk label (low, med, high), and event id. This enables a user to see the events by risk and take action to take down fraudulent events, saving the company reimbursement costs.
